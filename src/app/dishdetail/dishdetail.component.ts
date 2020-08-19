@@ -25,6 +25,7 @@ export class DishdetailComponent implements OnInit {
   prev: string;
   next: string;
   baseURL: string;
+  errMess: string;
 
   date = new Date();
 
@@ -66,13 +67,10 @@ export class DishdetailComponent implements OnInit {
     //switchmap => interrupts an observable while map it and creates a new observable 
     this.route.params
     .pipe(switchMap((params: Params) => this.dishService.getDish(params['id'])))
-    .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); });
+    .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); },
+               errmess => this.errMess = <any>errmess);
 
     this.baseURL = baseURL;
-
-    // let id = this.route.snapshot.params['id']; // make and snspshot of the url in this particular time
-    // this.dishService.getDish(id)
-    // .subscribe((dish) => this.dish = dish);
   }
 
   setPrevNext(dishId: string) {

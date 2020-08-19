@@ -15,6 +15,7 @@ export class MenuComponent implements OnInit {
   selectedDish: Dish;
 
   baseURL: String;
+  errMess: string;
 
   //In the constructor...
   constructor( 
@@ -24,7 +25,8 @@ export class MenuComponent implements OnInit {
   //lifeCycle method
   ngOnInit(): void { //will be executed whenever this component is created
     this.dishService.getDishes()
-    .subscribe((dishes)=> this.dishes = dishes);
+    .subscribe((dishes)=> this.dishes = dishes,
+    errmess => this.errMess = <any>errmess); //throw
 
     this.baseURL = baseURL;
   }

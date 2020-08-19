@@ -45,6 +45,8 @@ import { MatSliderModule } from '@angular/material/slider';
 import { HttpClientModule } from '@angular/common/http';
 // import { baseURL } from './shared/baseurl';
 
+import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
+
 
 //Decorator: Is a function that modifies js classes
 @NgModule({ // Allow you spcify some details about the module
@@ -79,6 +81,7 @@ import { HttpClientModule } from '@angular/common/http';
     DishService, 
     PromotionService, 
     LeaderService,
+    ProcessHTTPMsgService
     // {provide: 'BaseURL', useValue: baseURL}
   ],
   bootstrap: [AppComponent],
