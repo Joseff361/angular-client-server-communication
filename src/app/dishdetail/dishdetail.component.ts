@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Dish } from '../shared/dish';
 import { DishService } from '../services/dish.service';
@@ -10,6 +10,8 @@ import { Location } from '@angular/common'; //track the location of my page in t
 import { switchMap } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Comment } from '../shared/comment';
+import { baseURL } from '../shared/baseurl';
+
 
 @Component({
   selector: 'app-dishdetail',
@@ -22,6 +24,7 @@ export class DishdetailComponent implements OnInit {
   dishIds: string[];
   prev: string;
   next: string;
+  baseURL: string;
 
   date = new Date();
 
@@ -64,6 +67,8 @@ export class DishdetailComponent implements OnInit {
     this.route.params
     .pipe(switchMap((params: Params) => this.dishService.getDish(params['id'])))
     .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); });
+
+    this.baseURL = baseURL;
 
     // let id = this.route.snapshot.params['id']; // make and snspshot of the url in this particular time
     // this.dishService.getDish(id)

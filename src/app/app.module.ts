@@ -42,6 +42,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSliderModule } from '@angular/material/slider';
 
+import { HttpClientModule } from '@angular/common/http';
+// import { baseURL } from './shared/baseurl';
+
 
 //Decorator: Is a function that modifies js classes
 @NgModule({ // Allow you spcify some details about the module
@@ -69,9 +72,15 @@ import { MatSliderModule } from '@angular/material/slider';
     MatSelectModule,
     MatSlideToggleModule,
     MatProgressSpinnerModule,
-    MatSliderModule
+    MatSliderModule,
+    HttpClientModule
   ],
-  providers: [DishService, PromotionService, LeaderService], //services
+  providers: [  //services
+    DishService, 
+    PromotionService, 
+    LeaderService,
+    // {provide: 'BaseURL', useValue: baseURL}
+  ],
   bootstrap: [AppComponent],
   //The root Module doesn't have exports
   entryComponents: [

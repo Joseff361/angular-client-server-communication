@@ -6,6 +6,7 @@ import { Promotion } from '../shared/promotion';
 import { PromotionService } from '../services/promotion.service';
 import { Leader } from '../shared/leader';
 import { LeaderService } from '../services/leader.service';
+import { baseURL } from '../shared/baseurl';
 
 
 @Component({
@@ -18,6 +19,8 @@ export class HomeComponent implements OnInit {
   dish: Dish;
   promotion: Promotion; 
   leader: Leader; 
+  baseURL: String;
+
 
   constructor(
     private dishService: DishService,
@@ -32,6 +35,8 @@ export class HomeComponent implements OnInit {
     .subscribe((promotion) => this.promotion = promotion);
     this.leaderService.getFeaturedLeader()
     .subscribe((leader) => this.leader = leader);
+
+    this.baseURL = baseURL;
   }
 
 }
