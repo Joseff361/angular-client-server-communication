@@ -47,12 +47,14 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 
+import { FeedbackService } from './services/feedback.service';
+import { HighlightDirective } from './directives/highlight.directive';
 
 //Decorator: Is a function that modifies js classes
 @NgModule({ // Allow you spcify some details about the module
   //Metadata
   declarations: [ //components, directives and pipes
-    AppComponent, MenuComponent, DishdetailComponent, HeaderComponent, FooterComponent, HomeComponent, AboutComponent, ContactComponent, LoginComponent
+    AppComponent, MenuComponent, DishdetailComponent, HeaderComponent, FooterComponent, HomeComponent, AboutComponent, ContactComponent, LoginComponent, HighlightDirective
   ],
   imports: [ //third party modules
     BrowserModule,
@@ -81,7 +83,8 @@ import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
     DishService, 
     PromotionService, 
     LeaderService,
-    ProcessHTTPMsgService
+    ProcessHTTPMsgService,
+    FeedbackService
     // {provide: 'BaseURL', useValue: baseURL}
   ],
   bootstrap: [AppComponent],
