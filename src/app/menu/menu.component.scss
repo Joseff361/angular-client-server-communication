@@ -1,0 +1,9 @@
+$background-pale: #D1C4E9;
+$primary-color-dark:   #512DA8;
+
+.highlight {
+    background-color: $background-pale;
+    border: 1px solid $primary-color-dark;
+    z-index: 1;
+    transform: scale(1.01);
+  }
