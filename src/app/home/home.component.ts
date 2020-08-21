@@ -7,12 +7,20 @@ import { PromotionService } from '../services/promotion.service';
 import { Leader } from '../shared/leader';
 import { LeaderService } from '../services/leader.service';
 import { baseURL } from '../shared/baseurl';
+import { flyInOut, expand } from '../animations/app.animation';
 
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  host: { //ensure that this animation happends when route changes occur
+    '[@flyInOut]': 'true',
+    'style': 'display: block;'
+  },
+  animations: [
+      flyInOut(), expand()
+  ]
 })
 export class HomeComponent implements OnInit {
   

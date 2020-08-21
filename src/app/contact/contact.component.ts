@@ -2,11 +2,19 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Feedback, ContactType } from '../shared/feedback';
 import { FeedbackService } from '../services/feedback.service';
+import { flyInOut } from '../animations/app.animation';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+  styleUrls: ['./contact.component.scss'],
+  host: { //ensure that this animation happends when route changes occur
+    '[@flyInOut]': 'true',
+    'style': 'display: block;'
+  },
+  animations: [
+      flyInOut()
+  ]
 })
 export class ContactComponent implements OnInit {
   
