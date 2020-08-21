@@ -11,12 +11,26 @@ import { switchMap } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Comment } from '../shared/comment';
 import { baseURL } from '../shared/baseurl';
-
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-dishdetail',
   templateUrl: './dishdetail.component.html',
-  styleUrls: ['./dishdetail.component.scss']
+  styleUrls: ['./dishdetail.component.scss'],
+  animations: [
+    trigger('visibility', [
+        state('shown', style({
+            transform: 'scale(1.0)',
+            opacity: 1 //completely visible
+        })),
+        state('hidden', style({
+            transform: 'scale(0.5)',
+            opacity: 0 //completely hidden
+        })),
+        transition('* => *', animate('0.5s ease-in-out')) //any state to any state
+        // ease-in-out => how the transition happen
+    ])
+  ]
 })
 export class DishdetailComponent implements OnInit {
 
@@ -30,6 +44,8 @@ export class DishdetailComponent implements OnInit {
   date = new Date();
 
   dishcopy: Dish;
+
+  visibility = 'shown';
 
   comment: Comment;
   commnentForm: FormGroup;
@@ -68,10 +84,16 @@ export class DishdetailComponent implements OnInit {
 
     //switchmap => interrupts an observable while map it and creates a new observable 
     this.route.params
-    .pipe(switchMap((params: Params) => this.dishService.getDish(params['id'])))
-    .subscribe(dish => { this.dish = dish; this.dishcopy = dish; this.setPrevNext(dish.id); },
-               errmess => this.errMess = <any>errmess);
-
+    .pipe(switchMap((params: Params) => {
+      this.visibility = 'hidden';  //when the parameter changes
+      return this.dishService.getDish(params['id']);
+    }))
+    .subscribe(dish => { 
+      this.dish = dish; this.dishcopy = dish; 
+      this.setPrevNext(dish.id); 
+      this.visibility = 'shown'; //when the dish is aviable
+    },
+    errmess => this.errMess = <any>errmess);
     this.baseURL = baseURL;
   }
 
